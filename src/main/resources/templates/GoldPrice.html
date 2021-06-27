@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="js/amq\_jquery\_adapter.js"></script>
+    <script type="text/javascript" src="js/amq.js"></script>
+</head>
+
+<script type="text/javascript">
+    $(document).ready(
+        function()
+        {
+            org.activemq.Amq.init(
+                {
+                    uri: 'amq',
+                    logging: true,
+                    timeout: 1,
+                    clientId:'1234'
+                }
+            );
+        });
+
+    var myHandler =
+        {
+            rcvMessage: function(message)
+            {
+                alert(message.getAttribute('type'));
+                //console.log(message);
+            }
+        };
+    amq.addListener("testHandlerId","goldPrice",myHandler.rcvMessage);
+</script>
+<body>
+<div>通过ajax获取请求</div>
+
+</body>
+</html>
